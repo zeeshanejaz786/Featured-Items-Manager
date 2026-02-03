@@ -5,13 +5,20 @@ class FIM_Blocks {
     public static function register() {
         
         // Register editor script
-        wp_register_script(
-            'fim-featured-items-editor',
-            FIM_URL . 'blocks/featured-items/index.js',
-            [ 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components' ],
-            filemtime( FIM_PATH . 'blocks/featured-items/index.js' ),
-            true
-        );
+       wp_register_script(
+    'fim-featured-items-editor',
+    FIM_URL . 'blocks/featured-items/index.js',
+    [
+        'wp-blocks',
+        'wp-element',
+        'wp-block-editor',
+        'wp-components',
+        'wp-server-side-render', 
+    ],
+    filemtime( FIM_PATH . 'blocks/featured-items/index.js' ),
+    true
+);
+
 
         // Register the block type from block.json
         register_block_type(
@@ -38,3 +45,4 @@ class FIM_Blocks {
         return $html;
     }
 }
+
