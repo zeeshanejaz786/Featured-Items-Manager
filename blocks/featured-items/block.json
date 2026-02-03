@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "fim/featured-items",
+  "title": "Featured Items",
+  "category": "widgets",
+  "icon": "star-filled",
+  "description": "Display featured items dynamically.",
+  "keywords": ["featured", "items", "dynamic"],
+  "supports": {
+      "inserter": true,
+      "html": false
+  },
+  "attributes": {
+    "count": {
+      "type": "number",
+      "default": 5
+    }
+  }
+}

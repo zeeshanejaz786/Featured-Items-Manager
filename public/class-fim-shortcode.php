@@ -11,11 +11,14 @@ class FIM_Shortcode {
         $items = get_transient( 'fim_items' );
 
         if ( ! $items ) {
+            $items = FIM_Cache::build_items_cache();
+        }
+
+        if ( empty( $items ) ) {
             return '';
         }
 
         ob_start();
-
         echo '<ul>';
         foreach ( $items as $item ) {
             echo '<li>' . esc_html( $item['title'] ) . '</li>';

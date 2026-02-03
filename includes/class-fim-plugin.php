@@ -14,6 +14,10 @@ class FIM_Plugin {
         require_once FIM_PATH . 'includes/class-fim-cpt.php';
         require_once FIM_PATH . 'includes/class-fim-rest.php';
         require_once FIM_PATH . 'public/class-fim-shortcode.php';
+        require_once FIM_PATH . 'includes/class-fim-meta.php';
+        require_once FIM_PATH . 'includes/class-fim-cache.php';
+        require_once FIM_PATH . 'includes/class-fim-blocks.php';
+
 
         if ( is_admin() ) {
             require_once FIM_PATH . 'admin/class-fim-settings.php';
@@ -25,15 +29,25 @@ class FIM_Plugin {
 
         add_action( 'init', [ 'FIM_CPT', 'register' ] );
         add_action( 'init', [ 'FIM_Shortcode', 'register' ] );
-        add_action( 'rest_api_init', [ 'FIM_REST', 'register' ] );
-
-        if ( is_admin() ) {
-            add_action( 'admin_menu', [ 'FIM_Settings', 'register' ] );
-        }
-
-        add_action( 'init', [ 'FIM_Meta', 'register' ] );
         add_action( 'save_post_fim_item', [ 'FIM_Cache', 'clear_items_cache' ] );
+        add_action( 'rest_api_init', [ 'FIM_REST', 'register' ] );
+        add_action( 'init', [ 'FIM_Meta', 'register' ] );
         add_action( 'deleted_post', [ 'FIM_Cache', 'clear_items_cache' ] );
+        add_action( 'init', [ 'FIM_Blocks', 'register' ] );
+        
+        if ( is_admin() ) {
+                        add_action( 'admin_menu', [ 'FIM_Settings', 'register' ] );
+                        add_action( 'admin_init', 'fim_register_settings' );
+
+                        function fim_register_settings() {
+                            register_setting(
+                                'fim_settings',        // option_group
+                                'fim_settings_options' // option_name in wp_options
+                            );
+                        
+                        }
+
+                    }
 
     }
 }
